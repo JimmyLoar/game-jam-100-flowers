@@ -1,4 +1,5 @@
 *.rpyc
 *cache/
+*saves/
 
 log.txt
