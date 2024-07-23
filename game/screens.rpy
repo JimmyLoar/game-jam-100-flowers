@@ -372,6 +372,9 @@ screen main_menu():
             text "[config.name!t]":
                 style "main_menu_title"
 
+            text "[version_text]":
+                style "main_menu_version"
+
             text "[config.version]":
                 style "main_menu_version"
 

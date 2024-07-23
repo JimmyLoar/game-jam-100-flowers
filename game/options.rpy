@@ -12,7 +12,7 @@
 ##
 ## Символы "_()", окружающие название, отмечают его как пригодное для перевода.
 
-define config.name = _("Petals")
+define config.name = _("Seven Petals")
 
 
 ## Определяет, показывать ли заголовок, данный выше, на экране главного меню.
@@ -23,13 +23,14 @@ define gui.show_name = True
 
 ## Версия игры.
 
-define config.version = "1.0"
-
+define config.version = "0.1"
+define version_text = "Для Джема 100 цветов"
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
 ## Для отделения абзацев оставляйте между ними пустую строку.
 
 define gui.about = _p("""
+Зделано командой "Sevetals" для "Джем 100 цветов".
 """)
 
 
@@ -151,7 +152,7 @@ define config.save_directory = "Petals-1721070668"
 ##
 ## Иконка, показываемая на панели задач или на dock.
 
-define config.window_icon = "gui/window_icon.png"
+define config.window_icon = "gui/sevetals_logo.png"
 
 
 ## Настройка Дистрибутива ######################################################
