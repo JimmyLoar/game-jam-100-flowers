@@ -290,14 +290,16 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        xpos gui.navigation_xpos
+        xpos 960 #gui.navigation_xpos
         yalign 0.5
 
         spacing gui.navigation_spacing
 
         if main_menu:
 
-            textbutton _("Начать") action Start()
+            textbutton _("Начать") action Start():
+                background "/gui/button/button bg.png"
+                hover_background "/gui/button/button bg2.png"
 
         else:
 
@@ -389,7 +391,7 @@ style main_menu_frame:
     xsize 420
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    background "gui/overlay/menu_frame.png"
 
 style main_menu_vbox:
     xalign 1.0
