@@ -2,9 +2,21 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 301: expected a keyword argument or end of line.
-    background "/gui/button/button bg.png":
-                                          ^
+File "game/script.rpy", line 204: expected statement.
+    lable _choose_1:
+                   ^
+
+File "game/script.rpy", line 254: expected statement.
+    lable choose_2:
+                  ^
+
+File "game/script.rpy", line 300: expected statement.
+    lable choose_3:
+                  ^
+
+File "game/script.rpy", line 350: expected statement.
+    lable choose_4:
+                  ^
 
 Ren'Py Version: Ren'Py 8.1.3.23091805
-Thu Aug  1 19:23:18 2024
+Fri Aug  2 16:59:25 2024
