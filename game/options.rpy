@@ -152,7 +152,7 @@ define config.save_directory = "Petals-1721070668"
 ##
 ## Иконка, показываемая на панели задач или на dock.
 
-define config.window_icon = "gui/sevetals_logo.png"
+define config.window_icon = "gui/icon.png"
 
 
 ## Настройка Дистрибутива ######################################################

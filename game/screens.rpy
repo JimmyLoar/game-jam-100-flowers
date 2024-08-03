@@ -103,6 +103,7 @@ screen say(who, what):
         if who is not None:
 
             window:
+
                 id "namebox"
                 style "namebox"
                 text who id "who"
@@ -135,8 +136,8 @@ style window:
     xfill True
     yalign gui.textbox_yalign
     ysize gui.textbox_height
+    background Image("gui/textbox_dark.png", xalign=0.5, yalign=1.0)
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
 
 style namebox:
     xpos gui.name_xpos
@@ -286,51 +287,76 @@ style quick_button_text:
 ## другим меню и к началу игры.
 
 screen navigation():
+    tag menu 
+    
+    image "gui/button/stick.png":
+        xalign 0.5
 
     vbox:
-        style_prefix "navigation"
-
-        xpos 960 #gui.navigation_xpos
+        xalign 0.5
         yalign 0.5
+
+        style_prefix "navigation"
 
         spacing gui.navigation_spacing
 
         if main_menu:
-
             textbutton _("Начать") action Start():
-                background "/gui/button/button bg.png"
-                hover_background "/gui/button/button bg2.png"
+                background Image("gui/button/frame_idle_1.png", xalign=0.5, yalign=0.7, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_1.png", xalign=0.5, yalign=0.75, oversample=1.45)
 
         else:
 
-            textbutton _("История") action ShowMenu("history")
+            textbutton _("История") action ShowMenu("history"):
+                background Image("gui/button/frame_idle_1.png", xalign=0.5, yalign=0.7, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_1.png", xalign=0.5, yalign=0.75, oversample=1.4)
 
-            textbutton _("Сохранить") action ShowMenu("save")
+            textbutton _("Сохранить") action ShowMenu("save"):
+                background Image("gui/button/frame_idle_5.png", xalign=0.5, yalign=0.7, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_5.png", xalign=0.5, yalign=0.75, oversample=1.4)
 
-        textbutton _("Загрузить") action ShowMenu("load")
+        textbutton _("Загрузить") action ShowMenu("load"):
+                background Image("gui/button/frame_idle_2.png", xalign=0.5, yalign=0.7, oversample=1.3)
+                hover_background Image("gui/button/frame_hover_2.png", xalign=0.5, yalign=0.75, oversample=1.35)
 
-        textbutton _("Настройки") action ShowMenu("preferences")
+        textbutton _("Настройки") action ShowMenu("preferences"):
+                background Image("gui/button/frame_idle_3.png", xalign=0.5, yalign=0.7, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_3.png", xalign=0.5, yalign=0.75, oversample=1.4)
+
+        textbutton _("Об игре") action ShowMenu("about"):
+            if main_menu:
+                background Image("gui/button/frame_idle_5.png", xoffset=14, yalign=0.7, oversample=1.6)
+                hover_background Image("gui/button/frame_hover_5.png", xoffset=14, yalign=0.75, oversample=1.6)
+
+            else:
+                background Image("gui/button/frame_idle_5.png", xoffset=44, yalign=0.7, oversample=1.6)
+                hover_background Image("gui/button/frame_hover_5.png", xoffset=44, yalign=0.75, oversample=1.6)
+
+        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+            ## Помощь не необходима и не относится к мобильным устройствам.
+            textbutton _("Помощь") action ShowMenu("help"):
+                background Image("gui/button/frame_idle_4.png", xalign=0.5, yalign=0.4, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_4.png", xalign=0.5, yalign=0.45, oversample=1.4)
 
         if _in_replay:
 
-            textbutton _("Завершить повтор") action EndReplay(confirm=True)
+            textbutton _("Завершить повтор") action EndReplay(confirm=True):
+                background Image("gui/button/frame_idle_2.png", xalign=0.5, yalign=0.9, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_2.png", xalign=0.5, yalign=0.95, oversample=1.4)
 
         elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu()
-
-        textbutton _("Об игре") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Помощь не необходима и не относится к мобильным устройствам.
-            textbutton _("Помощь") action ShowMenu("help")
+            textbutton _("Главное меню") action MainMenu():
+                background Image("gui/button/frame_idle_2.png", xalign=0.5, yalign=0.9, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_2.png", xalign=0.5, yalign=0.95, oversample=1.4)
 
         if renpy.variant("pc"):
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            textbutton _("Выход") action Quit(confirm=not main_menu):
+                background Image("gui/button/frame_idle_6.png", xalign=0.5, yalign=0.6, oversample=1.4)
+                hover_background Image("gui/button/frame_hover_6.png", xalign=0.5, yalign=0.65, oversample=1.4)
 
 
 style navigation_button is gui_button
@@ -341,6 +367,7 @@ style navigation_button:
     properties gui.button_properties("navigation_button")
 
 style navigation_button_text:
+    size 48
     properties gui.text_properties("navigation_button")
 
 
@@ -350,6 +377,8 @@ style navigation_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
+# image main_menu_anim = Movie(play="gui/menu_anim.wov", loop=True)
+
 screen main_menu():
 
     ## Этот тег гарантирует, что любой другой экран с тем же тегом будет
@@ -357,6 +386,8 @@ screen main_menu():
     tag menu
 
     add gui.main_menu_background
+    # add Movie(play="gui/menu_anim.webm", loop=True)
+    # $renpy.movie_cutscene("gui/menu_anim.wov")
 
     ## Эта пустая рамка затеняет главное меню.
     frame:
@@ -425,66 +456,64 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
 
     if main_menu:
         add gui.main_menu_background
+
     else:
         add gui.game_menu_background
 
+    # frame:
+    #     style "game_menu_outer_frame"
+
     frame:
-        style "game_menu_outer_frame"
+        xfill True
+        style "game_menu_content_frame"
 
-        hbox:
+        if scroll == "viewport":
 
-            ## Резервирует пространство для навигации.
-            frame:
-                style "game_menu_navigation_frame"
+            viewport:
+                yinitial yinitial
+                scrollbars "vertical"
+                mousewheel True
+                draggable True
+                pagekeys True
 
-            frame:
-                style "game_menu_content_frame"
+                side_yfill True
 
-                if scroll == "viewport":
-
-                    viewport:
-                        yinitial yinitial
-                        scrollbars "vertical"
-                        mousewheel True
-                        draggable True
-                        pagekeys True
-
-                        side_yfill True
-
-                        vbox:
-                            spacing spacing
-
-                            transclude
-
-                elif scroll == "vpgrid":
-
-                    vpgrid:
-                        cols 1
-                        yinitial yinitial
-
-                        scrollbars "vertical"
-                        mousewheel True
-                        draggable True
-                        pagekeys True
-
-                        side_yfill True
-
-                        spacing spacing
-
-                        transclude
-
-                else:
+                vbox:
+                    spacing spacing
 
                     transclude
 
-    use navigation
+        elif scroll == "vpgrid":
+
+            vpgrid:
+                cols 3
+                yinitial yinitial
+
+                scrollbars "vertical"
+                mousewheel True
+                draggable True
+                pagekeys True
+
+                side_yfill True
+
+                spacing spacing
+
+                transclude
+
+        else:
+
+            transclude
+
+    # use navigation
 
     textbutton _("Вернуться"):
         style "return_button"
+        xalign 0.5
 
         action Return()
 
-    label title
+    label title:
+        xalign 0.5
 
     if main_menu:
         key "game_menu" action ShowMenu("main_menu")
@@ -514,9 +543,11 @@ style game_menu_navigation_frame:
     yfill True
 
 style game_menu_content_frame:
-    left_margin 60
-    right_margin 30
-    top_margin 15
+    left_margin 280
+    right_margin 340
+    top_margin 180
+    bottom_margin 180 
+    background Image("gui/overlay/game_menu.png", xoffset= -310, yoffset= -180)
 
 style game_menu_viewport:
     xsize 1380
@@ -626,6 +657,17 @@ screen file_slots(title):
                     style "page_label_text"
                     value page_name_value
 
+            if config.has_sync:
+                if CurrentScreenName() == "save":
+                    textbutton _("Синхронизация загрузки"):
+                        action UploadSync()
+                        xalign 1.0
+                else:
+                    textbutton _("Скачать Sync"):
+                        action DownloadSync()
+                        xalign 1.0
+                        yalign 0
+
             ## Таблица слотов.
             grid gui.file_slot_cols gui.file_slot_rows:
                 style_prefix "slot"
@@ -680,15 +722,8 @@ screen file_slots(title):
 
                     textbutton _(">") action FilePageNext()
 
-                if config.has_sync:
-                    if CurrentScreenName() == "save":
-                        textbutton _("Синхронизация загрузки"):
-                            action UploadSync()
-                            xalign 0.5
-                    else:
-                        textbutton _("Скачать Sync"):
-                            action DownloadSync()
-                            xalign 0.5
+
+
 
 
 style page_label is gui_label
@@ -702,7 +737,7 @@ style slot_time_text is slot_button_text
 style slot_name_text is slot_button_text
 
 style page_label:
-    xpadding 75
+    xpadding 45
     ypadding 5
 
 style page_label_text:
@@ -730,13 +765,10 @@ style slot_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
 screen preferences():
-
     tag menu
 
     use game_menu(_("Настройки"), scroll="viewport"):
-
         vbox:
-
             hbox:
                 box_wrap True
 
@@ -844,7 +876,7 @@ style pref_label_text:
     yalign 1.0
 
 style pref_vbox:
-    xsize 338
+    xsize 360
 
 style radio_vbox:
     spacing gui.pref_button_spacing
@@ -860,14 +892,16 @@ style check_vbox:
     spacing gui.pref_button_spacing
 
 style check_button:
+    xfill True
     properties gui.button_properties("check_button")
     foreground "gui/button/check_[prefix_]foreground.png"
 
 style check_button_text:
+    xfill True
     properties gui.text_properties("check_button")
 
 style slider_slider:
-    xsize 525
+    xsize 460
 
 style slider_button:
     properties gui.button_properties("slider_button")
@@ -878,7 +912,7 @@ style slider_button_text:
     properties gui.text_properties("slider_button")
 
 style slider_vbox:
-    xsize 675
+    xsize 540
 
 
 ## Экран истории ###############################################################
@@ -1219,7 +1253,7 @@ screen skip_indicator():
         hbox:
             spacing 9
 
-            text _("Пропускаю")
+            # text _("Пропускаю")
 
             text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
             text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"

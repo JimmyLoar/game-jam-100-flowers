@@ -1,4 +1,6 @@
 ﻿init python:
+    _game_menu_screen = "navigation"
+
     import functools
     def boopy_voice(event, interact=True, boopfile="beep 1.wav", **kwargs):
         if not interact:
@@ -39,7 +41,11 @@ label start: #Сцена 1: Наставление шамана
     # Персонажи: Тэнсу, Нтанда (шаман), Вождь
     # Локации: Племя
 
-    show shaman neutral
+    # Начальное видео
+    # $renpy.movie_cutscene(".webm")
+
+    scene bg village1 evening # Фон для тестов интерфейса
+    
     "Шаман Нтанда наконец-то выходит из своей хижины." 
     "Пара десятков глаз следят за ним, готовые внимать каждому его слову." 
     "Он стоит в центре нашего небольшого поселения, мы с собратьями окружили его полукругом и внимательно следим за каждым его движением. "

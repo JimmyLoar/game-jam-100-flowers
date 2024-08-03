@@ -65,7 +65,7 @@ define gui.text_font = "DejaVuSans.ttf"
 define gui.name_text_font = "DejaVuSans.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "gui/font/Ds Greece.ttf"
 
 ## Размер нормального текста диалога.
 define gui.text_size = 33
@@ -97,6 +97,9 @@ define gui.game_menu_background = "gui/game_menu.png"
 ##
 ## Эти переменные контролируют, как диалог появляется на отдельной строчке.
 
+##использование темной (True) или светлой (False) темы
+define gui.textbox_darkframe = False
+
 ## Высота текстового окна, содержащего диалог.
 define gui.textbox_height = 278
 
@@ -123,7 +126,7 @@ define gui.namebox_height = None
 
 ## Границы окна, содержащего имя персонажа слева, сверху, справа и снизу по
 ## порядку.
-define gui.namebox_borders = Borders(5, 5, 5, 5)
+define gui.namebox_borders = Borders(4, 4, 4, 4, 40, 16, 40, 4)
 
 ## Если True, фон текстового окна будет моститься (расширяться по эффекту
 ## плитки). Если False, фон текстового окна будет фиксированным.
@@ -133,11 +136,11 @@ define gui.namebox_tile = False
 ## Размещение диалога по отношению к текстовому окну. Это могут быть целые
 ## значения в пикселях слева и сверху от текстового окна или процентное
 ## отношение, например, 0.5 для центрирования.
-define gui.dialogue_xpos = 402
-define gui.dialogue_ypos = 75
+define gui.dialogue_xpos = 302
+define gui.dialogue_ypos = 105
 
 ## Максимальная ширина текста диалога в пикселях.
-define gui.dialogue_width = 1116
+define gui.dialogue_width = 1316
 
 ## Горизонтальное выравнивание текста диалога. Это может быть 0.0 для
 ## левоориентированного, 0.5 для центрированного и 1.0 для правоориентированного
@@ -156,7 +159,7 @@ define gui.button_width = None
 define gui.button_height = None
 
 ## Границы каждой стороны кнопки в порядке слева, сверху, справа, снизу.
-define gui.button_borders = Borders(6, 6, 6, 6)
+define gui.button_borders = Borders(24, 4, 30, 0, 24, 4, 30, 10)
 
 ## Если True, фон изображения будет моститься. Если False, фон изображения будет
 ## линейно масштабирован.
@@ -176,7 +179,7 @@ define gui.button_text_insensitive_color = gui.insensitive_color
 
 ## Горизонтальное выравнивание текста в кнопке. (0.0 — лево, 0.5 — по центру,
 ## 1.0 — право).
-define gui.button_text_xalign = 0.0
+define gui.button_text_xalign = 0.5
 
 
 ## Эти переменные переписывают настройки различных видов кнопок. Пожалуйста,
@@ -185,13 +188,13 @@ define gui.button_text_xalign = 0.0
 ##
 ## Эти настройки используются стандартным интерфейсом:
 
-define gui.radio_button_borders = Borders(27, 6, 6, 6)
+define gui.radio_button_borders = Borders(27, 6, 6, 6, 24, 0, 30, 0)
 
-define gui.check_button_borders = Borders(27, 6, 6, 6)
+define gui.check_button_borders = Borders(27, 6, 6, 6, 24, 0, 30, 0)
 
 define gui.confirm_button_text_xalign = 0.5
 
-define gui.page_button_borders = Borders(15, 6, 15, 6)
+define gui.page_button_borders = Borders(0, 2, 0, 6, 24, 2, 30, 0)
 
 define gui.quick_button_borders = Borders(15, 6, 15, 0)
 define gui.quick_button_text_size = 21
@@ -229,7 +232,7 @@ define gui.choice_button_text_insensitive_color = '#8888887f'
 
 ## Кнопка слота сохранения.
 define gui.slot_button_width = 414
-define gui.slot_button_height = 309
+define gui.slot_button_height = 275 #309
 define gui.slot_button_borders = Borders(15, 15, 15, 15)
 define gui.slot_button_text_size = 21
 define gui.slot_button_text_xalign = 0.5
@@ -265,7 +268,7 @@ define gui.notify_ypos = 68
 define gui.choice_spacing = 33
 
 ## Кнопки в секции навигации главного и игрового меню.
-define gui.navigation_spacing = 6
+define gui.navigation_spacing = 40
 
 ## Контролирует интервал между настройками.
 define gui.pref_spacing = 15
@@ -274,7 +277,7 @@ define gui.pref_spacing = 15
 define gui.pref_button_spacing = 0
 
 ## Интервал между кнопками страниц.
-define gui.page_spacing = 0
+define gui.page_spacing = 8
 
 ## Интервал между слотами.
 define gui.slot_spacing = 15
@@ -350,7 +353,7 @@ define config.history_length = 250
 define gui.history_height = 210
 
 ## Дополнительное пространство добавляемое между записями экрана истории.
-define gui.history_spacing = 0
+define gui.history_spacing = 8
 
 ## Местоположение, ширина и выравнивание заголовка, показывающего имя говорящего
 ## персонажа.
@@ -466,7 +469,7 @@ init python:
         gui.quick_button_text_size = 30
 
         ## Местоположение кнопок слотов.
-        gui.file_slot_cols = 2
+        gui.file_slot_cols = 3
         gui.file_slot_rows = 2
 
         ## Режим NVL.
